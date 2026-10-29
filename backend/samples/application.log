@@ -1,0 +1,124 @@
+# SYNTHETIC SAMPLE LOG: Timestamped Microservices Application
+# Created for Data Visualization Project demonstration
+2026-10-28 08:00:59 INFO [auth-service] Cache hit for key 'product_catalog_44'
+2026-10-28 08:01:40 INFO [database-service] User authentication successful
+2026-10-28 08:02:11 INFO [auth-service] Processed order submission successfully
+2026-10-28 08:02:43 DEBUG [payment-service] Debug payload serialization complete
+2026-10-28 08:03:06 INFO [database-service] Health check probe healthy
+2026-10-28 08:03:24 DEBUG [order-api] Debug payload serialization complete
+2026-10-28 08:04:11 ERROR [order-api] Upstream socket closed prematurely
+2026-10-28 08:05:06 INFO [auth-service] Processed order submission successfully
+2026-10-28 08:05:21 ERROR [database-service] Upstream socket closed prematurely
+2026-10-28 08:06:03 DEBUG [payment-service] Debug payload serialization complete
+2026-10-28 08:06:21 INFO [payment-service] User authentication successful
+2026-10-28 08:06:43 DEBUG [inventory-service] Debug payload serialization complete
+2026-10-28 08:07:41 INFO [inventory-service] User authentication successful
+2026-10-28 08:08:17 INFO [payment-service] Cache hit for key 'product_catalog_44'
+2026-10-28 08:08:38 INFO [order-api] Processed order submission successfully
+2026-10-28 08:09:36 ERROR [payment-service] Upstream socket closed prematurely
+2026-10-28 08:10:05 DEBUG [order-api] Debug payload serialization complete
+2026-10-28 08:10:34 WARNING [payment-service] Retry attempt 2 of 3 for upstream RPC
+2026-10-28 08:11:26 WARNING [database-service] Disk write latency higher than normal (120ms)
+2026-10-28 08:12:10 WARNING [inventory-service] Rate limit approaching threshold (85%)
+2026-10-28 08:12:53 DEBUG [auth-service] Debug payload serialization complete
+2026-10-28 08:13:52 INFO [database-service] Health check probe healthy
+2026-10-28 08:14:14 INFO [database-service] User authentication successful
+2026-10-28 08:14:55 INFO [database-service] User authentication successful
+2026-10-28 08:15:38 DEBUG [database-service] Debug payload serialization complete
+2026-10-28 08:16:43 INFO [inventory-service] Health check probe healthy
+MALFORMED_ENTRY_NO_TIMESTAMP_OR_LEVEL ::: raw dump error stack corrupt buffer
+2026-10-28 08:17:00 WARNING [payment-service] Rate limit approaching threshold (85%)
+2026-10-28 08:17:50 INFO [auth-service] Processed order submission successfully
+2026-10-28 08:18:41 INFO [auth-service] User authentication successful
+2026-10-28 08:18:58 INFO [payment-service] Processed order submission successfully
+2026-10-28 08:19:59 WARNING [database-service] Retry attempt 2 of 3 for upstream RPC
+2026-10-28 08:20:50 WARNING [order-api] Disk write latency higher than normal (120ms)
+2026-10-28 08:21:34 INFO [database-service] Processed order submission successfully
+2026-10-28 08:21:56 INFO [order-api] Health check probe healthy
+2026-10-28 08:22:33 ERROR [database-service] Upstream socket closed prematurely
+2026-10-28 08:22:55 WARNING [auth-service] Retry attempt 2 of 3 for upstream RPC
+2026-10-28 08:23:33 INFO [auth-service] Health check probe healthy
+2026-10-28 08:23:57 INFO [database-service] Processed order submission successfully
+2026-10-28 08:24:14 INFO [auth-service] Cache hit for key 'product_catalog_44'
+2026-10-28 08:24:44 INFO [inventory-service] Processed order submission successfully
+2026-10-28 08:25:06 INFO [order-api] Health check probe healthy
+2026-10-28 08:25:59 INFO [inventory-service] User authentication successful
+2026-10-28 08:26:34 DEBUG [order-api] Debug payload serialization complete
+2026-10-28 08:27:16 DEBUG [inventory-service] Debug payload serialization complete
+2026-10-28 08:27:42 INFO [database-service] Processed order submission successfully
+2026-10-28 08:28:07 INFO [payment-service] Health check probe healthy
+2026-10-28 08:28:52 WARNING [auth-service] Retry attempt 2 of 3 for upstream RPC
+2026-10-28 08:29:47 WARNING [order-api] Retry attempt 2 of 3 for upstream RPC
+2026-10-28 08:30:03 ERROR [order-api] Upstream socket closed prematurely
+2026-10-28 08:30:25 ERROR [database-service] Connection pool exhausted (max_connections=50)
+2026-10-28 08:31:16 ERROR [payment-service] Payment gateway timeout after 5000ms
+2026-10-28 08:32:15 ERROR [payment-service] Transaction 504 Gateway Timeout
+2026-10-28 08:33:00 DEBUG [order-api] Debug payload serialization complete
+2026-10-28 08:33:26 WARNING [inventory-service] Rate limit approaching threshold (85%)
+2026-10-28 08:33:50 ERROR [database-service] Timeout waiting for query lock on table 'orders'
+2026-10-28 08:34:31 ERROR [order-api] Upstream socket closed prematurely
+2026-10-28 08:34:54 ERROR [database-service] Deadlock detected during batch update
+2026-10-28 08:35:28 INFO [inventory-service] Health check probe healthy
+2026-10-28 08:35:54 INFO [order-api] Health check probe healthy
+2026-10-28 08:36:17 ERROR [order-api] Upstream socket closed prematurely
+2026-10-28 08:37:06 ERROR [database-service] Deadlock detected during batch update
+2026-10-28 08:38:03 DEBUG [auth-service] Debug payload serialization complete
+2026-10-28 08:38:49 ERROR [database-service] Deadlock detected during batch update
+2026-10-28 08:39:15 ERROR [payment-service] Invalid merchant signature token
+2026-10-28 08:39:59 DEBUG [inventory-service] Debug payload serialization complete
+2026-10-28 08:40:16 WARNING [order-api] Rate limit approaching threshold (85%)
+2026-10-28 08:40:43 ERROR [payment-service] Payment gateway timeout after 5000ms
+2026-10-28 08:41:42 INFO [inventory-service] Processed order submission successfully
+2026-10-28 08:42:34 ERROR [inventory-service] Upstream socket closed prematurely
+2026-10-28 08:43:13 WARNING [auth-service] Disk write latency higher than normal (120ms)
+2026-10-28 08:43:40 INFO [order-api] Health check probe healthy
+>>> CORRUPTED TRUNCATED PACKET: 0x9948271048201 <<<
+2026-10-28 08:44:27 INFO [order-api] Cache hit for key 'product_catalog_44'
+2026-10-28 08:44:56 INFO [auth-service] User authentication successful
+2026-10-28 08:45:42 ERROR [database-service] Deadlock detected during batch update
+2026-10-28 08:46:33 ERROR [payment-service] Upstream socket closed prematurely
+2026-10-28 08:47:09 DEBUG [payment-service] Debug payload serialization complete
+2026-10-28 08:48:14 DEBUG [auth-service] Debug payload serialization complete
+2026-10-28 08:48:51 ERROR [payment-service] Upstream socket closed prematurely
+2026-10-28 08:49:45 INFO [inventory-service] User authentication successful
+2026-10-28 08:50:11 INFO [database-service] Processed order submission successfully
+2026-10-28 08:50:30 INFO [order-api] Cache hit for key 'product_catalog_44'
+2026-10-28 08:50:58 WARNING [auth-service] Rate limit approaching threshold (85%)
+2026-10-28 08:51:33 ERROR [auth-service] Upstream socket closed prematurely
+2026-10-28 08:52:36 WARNING [inventory-service] Disk write latency higher than normal (120ms)
+2026-10-28 08:52:52 DEBUG [auth-service] Debug payload serialization complete
+2026-10-28 08:53:29 INFO [payment-service] Cache hit for key 'product_catalog_44'
+2026-10-28 08:54:06 DEBUG [order-api] Debug payload serialization complete
+2026-10-28 08:54:54 INFO [order-api] User authentication successful
+2026-10-28 08:55:41 INFO [payment-service] User authentication successful
+2026-10-28 08:56:39 DEBUG [auth-service] Debug payload serialization complete
+2026-10-28 08:56:54 INFO [order-api] Health check probe healthy
+2026-10-28 08:57:52 INFO [inventory-service] User authentication successful
+2026-10-28 08:58:53 INFO [inventory-service] User authentication successful
+2026-10-28 08:59:30 INFO [payment-service] Cache hit for key 'product_catalog_44'
+2026-10-28 08:59:45 WARNING [payment-service] Disk write latency higher than normal (120ms)
+2026-10-28 09:00:49 INFO [order-api] Processed order submission successfully
+2026-10-28 09:01:44 ERROR [inventory-service] Upstream socket closed prematurely
+2026-10-28 09:02:40 INFO [payment-service] User authentication successful
+2026-10-28 09:03:31 INFO [inventory-service] Health check probe healthy
+2026-10-28 09:04:03 INFO [database-service] Health check probe healthy
+2026-10-28 09:05:06 WARNING [database-service] Disk write latency higher than normal (120ms)
+2026-10-28 09:05:36 ERROR [database-service] Upstream socket closed prematurely
+2026-10-28 09:05:59 INFO [payment-service] Processed order submission successfully
+2026-10-28 09:06:57 DEBUG [payment-service] Debug payload serialization complete
+2026-10-28 09:07:53 INFO [database-service] Processed order submission successfully
+2026-10-28 09:08:24 WARNING [auth-service] Retry attempt 2 of 3 for upstream RPC
+2026-10-28 09:08:43 ERROR [auth-service] Upstream socket closed prematurely
+2026-10-28 09:09:04 WARNING [payment-service] Disk write latency higher than normal (120ms)
+2026-10-28 09:09:29 DEBUG [order-api] Debug payload serialization complete
+2026-10-28 09:10:04 ERROR [database-service] Upstream socket closed prematurely
+2026-10-28 09:10:57 DEBUG [database-service] Debug payload serialization complete
+2026-10-28 09:12:01 DEBUG [payment-service] Debug payload serialization complete
+2026-10-28 09:12:45 WARNING [order-api] Rate limit approaching threshold (85%)
+2026-10-28 09:13:31 INFO [database-service] Health check probe healthy
+2026-10-28 09:14:15 DEBUG [auth-service] Debug payload serialization complete
+2026-10-28 09:14:59 INFO [order-api] Processed order submission successfully
+2026-10-28 09:15:28 INFO [database-service] Health check probe healthy
+2026-10-28 09:16:19 WARNING [payment-service] Rate limit approaching threshold (85%)
+2026-10-28 09:17:08 INFO [database-service] Health check probe healthy
+2026-10-28 09:17:25 DEBUG [database-service] Debug payload serialization complete

@@ -1,0 +1,102 @@
+timestamp,severity,service,message,source_ip,status_code,latency_ms
+"2026-10-28 08:00:32","ERR","rbac-service","TLS handshake failure with peer node","172.16.0.6",500,17.3
+"2026-10-28 08:01:36","WARN","audit-logger","Audit log verification checkpoint #1","172.16.0.32",403,105.3
+"2026-10-28 08:02:40","INFO","key-vault","Audit log verification checkpoint #2","172.16.0.13",200,84.7
+"2026-10-28 08:03:19","ERR","cluster-mgr","TLS handshake failure with peer node","172.16.0.5",500,30.8
+"2026-10-28 08:04:29","WARN","audit-logger","Audit log verification checkpoint #4","172.16.0.13",403,9.0
+"2026-10-28 08:05:21","ERR","rbac-service","TLS handshake failure with peer node","172.16.0.19",500,24.1
+"2026-10-28 08:06:02","WARN","key-vault","Audit log verification checkpoint #6","172.16.0.33",403,80.7
+"2026-10-28 08:06:30","ERR","audit-logger","TLS handshake failure with peer node","172.16.0.14",500,51.4
+"2026-10-28 08:07:00","CRIT","audit-logger","TLS handshake failure with peer node","172.16.0.42",500,52.4
+"2026-10-28 08:07:30","INFO","rbac-service","Audit log verification checkpoint #9","172.16.0.19",200,91.6
+"2026-10-28 08:08:01","WARN","cluster-mgr","Audit log verification checkpoint #10","172.16.0.36",403,100.4
+"2026-10-28 08:08:44","INFO","rbac-service","Audit log verification checkpoint #11","172.16.0.11",200,15.3
+"2026-10-28 08:09:56","ERR","cluster-mgr","TLS handshake failure with peer node","172.16.0.16",500,130.1
+"2026-10-28 08:10:55","WARN","cluster-mgr","Audit log verification checkpoint #13","172.16.0.32",403,10.4
+"2026-10-28 08:11:34","CRIT","key-vault","TLS handshake failure with peer node","172.16.0.2",500,113.7
+"2026-10-28 08:11:55","ERR","audit-logger","TLS handshake failure with peer node","172.16.0.44",500,126.5
+"2026-10-28 08:12:44","ERR","cluster-mgr","TLS handshake failure with peer node","172.16.0.47",500,68.3
+"2026-10-28 08:13:55","WARN","cluster-mgr","Audit log verification checkpoint #17","172.16.0.12",403,107.4
+"2026-10-28 08:15:00","WARN","rbac-service","Audit log verification checkpoint #18","172.16.0.12",403,26.8
+"2026-10-28 08:15:34","ERR","cluster-mgr","TLS handshake failure with peer node","172.16.0.23",500,90.7
+"2026-10-28 08:16:03","INFO","audit-logger","Audit log verification checkpoint #20","172.16.0.20",200,28.2
+"2026-10-28 08:17:11","WARN","cluster-mgr","Audit log verification checkpoint #21","172.16.0.15",403,33.2
+"2026-10-28 08:17:36","INFO","cluster-mgr","Audit log verification checkpoint #22","172.16.0.14",200,72.5
+"2026-10-28 08:18:50","CRIT","cluster-mgr","TLS handshake failure with peer node","172.16.0.19",500,92.2
+"2026-10-28 08:19:59","INFO","cluster-mgr","Audit log verification checkpoint #24","172.16.0.32",200,42.3
+"2026-10-28 08:21:10","CRIT","rbac-service","TLS handshake failure with peer node","172.16.0.48",500,11.1
+"2026-10-28 08:22:17","WARN","cluster-mgr","Audit log verification checkpoint #26","172.16.0.47",403,28.3
+"2026-10-28 08:22:37","ERR","audit-logger","TLS handshake failure with peer node","172.16.0.42",500,106.3
+"2026-10-28 08:23:31","CRIT","cluster-mgr","TLS handshake failure with peer node","172.16.0.38",500,124.8
+"2026-10-28 08:24:44","ERR","key-vault","TLS handshake failure with peer node","172.16.0.36",500,123.2
+"2026-10-28 08:25:19","WARN","cluster-mgr","Audit log verification checkpoint #30","172.16.0.20",403,78.1
+"2026-10-28 08:26:29","INFO","key-vault","Audit log verification checkpoint #31","172.16.0.34",200,16.4
+"2026-10-28 08:27:26","WARN","cluster-mgr","Audit log verification checkpoint #32","172.16.0.45",403,100.1
+"2026-10-28 08:28:03","CRIT","rbac-service","TLS handshake failure with peer node","172.16.0.13",500,29.2
+"2026-10-28 08:29:15","WARN","rbac-service","Audit log verification checkpoint #34","172.16.0.47",403,11.4
+"2026-10-28 08:29:36","ERR","audit-logger","TLS handshake failure with peer node","172.16.0.14",500,66.0
+"2026-10-28 08:30:29","CRIT","audit-logger","TLS handshake failure with peer node","172.16.0.45",500,23.4
+"2026-10-28 08:31:12","WARN","cluster-mgr","Audit log verification checkpoint #37","172.16.0.50",403,34.7
+"2026-10-28 08:31:52","INFO","audit-logger","Audit log verification checkpoint #38","172.16.0.16",200,51.4
+"2026-10-28 08:32:47","CRIT","audit-logger","TLS handshake failure with peer node","172.16.0.19",500,98.8
+"2026-10-28 08:33:43","INFO","rbac-service","Audit log verification checkpoint #40","172.16.0.50",200,91.0
+MALFORMED_CSV_ROW_TOO_FEW_COLUMNS
+"2026-10-28 08:34:40","INFO","rbac-service","Audit log verification checkpoint #41","172.16.0.4",200,92.4
+"2026-10-28 08:35:35","WARN","rbac-service","Audit log verification checkpoint #42","172.16.0.1",403,95.7
+"2026-10-28 08:36:27","CRIT","audit-logger","TLS handshake failure with peer node","172.16.0.41",500,119.5
+"2026-10-28 08:36:54","WARN","key-vault","Audit log verification checkpoint #44","172.16.0.43",403,49.9
+"2026-10-28 08:37:31","INFO","cluster-mgr","Audit log verification checkpoint #45","172.16.0.6",200,35.8
+"2026-10-28 08:37:55","WARN","cluster-mgr","Audit log verification checkpoint #46","172.16.0.11",403,93.2
+"2026-10-28 08:38:37","WARN","key-vault","Audit log verification checkpoint #47","172.16.0.36",403,137.4
+"2026-10-28 08:39:46","INFO","key-vault","Audit log verification checkpoint #48","172.16.0.13",200,77.6
+"2026-10-28 08:40:51","ERR","cluster-mgr","TLS handshake failure with peer node","172.16.0.29",500,66.5
+"2026-10-28 08:41:48","INFO","key-vault","Audit log verification checkpoint #50","172.16.0.21",200,120.7
+"2026-10-28 08:42:58","INFO","key-vault","Audit log verification checkpoint #51","172.16.0.23",200,121.9
+"2026-10-28 08:43:52","CRIT","cluster-mgr","TLS handshake failure with peer node","172.16.0.13",500,27.3
+"2026-10-28 08:44:29","WARN","cluster-mgr","Audit log verification checkpoint #53","172.16.0.19",403,27.7
+"2026-10-28 08:45:00","ERR","audit-logger","TLS handshake failure with peer node","172.16.0.35",500,6.5
+"2026-10-28 08:45:44","INFO","rbac-service","Audit log verification checkpoint #55","172.16.0.41",200,47.2
+"2026-10-28 08:46:24","INFO","key-vault","Audit log verification checkpoint #56","172.16.0.17",200,15.0
+"2026-10-28 08:47:08","INFO","rbac-service","Audit log verification checkpoint #57","172.16.0.34",200,35.0
+"2026-10-28 08:48:01","INFO","audit-logger","Audit log verification checkpoint #58","172.16.0.44",200,78.5
+"2026-10-28 08:48:24","WARN","cluster-mgr","Audit log verification checkpoint #59","172.16.0.49",403,9.9
+"2026-10-28 08:49:15","ERR","audit-logger","TLS handshake failure with peer node","172.16.0.39",500,63.3
+"2026-10-28 08:49:51","CRIT","rbac-service","TLS handshake failure with peer node","172.16.0.23",500,96.0
+"2026-10-28 08:50:12","WARN","key-vault","Audit log verification checkpoint #62","172.16.0.47",403,145.0
+"2026-10-28 08:50:59","ERR","audit-logger","TLS handshake failure with peer node","172.16.0.18",500,144.1
+"2026-10-28 08:52:01","WARN","audit-logger","Audit log verification checkpoint #64","172.16.0.15",403,80.9
+"2026-10-28 08:53:02","INFO","rbac-service","Audit log verification checkpoint #65","172.16.0.22",200,65.8
+"2026-10-28 08:53:22","CRIT","rbac-service","TLS handshake failure with peer node","172.16.0.36",500,80.6
+"2026-10-28 08:53:53","WARN","key-vault","Audit log verification checkpoint #67","172.16.0.36",403,119.9
+"2026-10-28 08:54:54","CRIT","cluster-mgr","TLS handshake failure with peer node","172.16.0.11",500,58.7
+"2026-10-28 08:55:41","WARN","key-vault","Audit log verification checkpoint #69","172.16.0.23",403,31.0
+"2026-10-28 08:56:18","INFO","audit-logger","Audit log verification checkpoint #70","172.16.0.7",200,9.8
+"2026-10-28 08:57:30","INFO","key-vault","Audit log verification checkpoint #71","172.16.0.9",200,14.5
+"2026-10-28 08:58:33","WARN","key-vault","Audit log verification checkpoint #72","172.16.0.43",403,84.7
+"2026-10-28 08:59:18","INFO","audit-logger","Audit log verification checkpoint #73","172.16.0.46",200,104.4
+"2026-10-28 08:59:53","CRIT","rbac-service","TLS handshake failure with peer node","172.16.0.13",500,93.8
+"2026-10-28 09:00:26","INFO","rbac-service","Audit log verification checkpoint #75","172.16.0.4",200,83.4
+"2026-10-28 09:00:48","CRIT","rbac-service","TLS handshake failure with peer node","172.16.0.45",500,136.8
+"2026-10-28 09:01:54","CRIT","key-vault","TLS handshake failure with peer node","172.16.0.38",500,116.2
+"2026-10-28 09:02:30","WARN","rbac-service","Audit log verification checkpoint #78","172.16.0.27",403,48.7
+"2026-10-28 09:03:05","CRIT","audit-logger","TLS handshake failure with peer node","172.16.0.40",500,66.5
+"2026-10-28 09:03:54","CRIT","audit-logger","TLS handshake failure with peer node","172.16.0.21",500,78.2
+"2026-10-28 09:04:36","WARN","cluster-mgr","Audit log verification checkpoint #81","172.16.0.41",403,125.6
+"2026-10-28 09:05:35","ERR","key-vault","TLS handshake failure with peer node","172.16.0.14",500,74.7
+"2026-10-28 09:06:40","WARN","audit-logger","Audit log verification checkpoint #83","172.16.0.10",403,7.0
+"2026-10-28 09:07:27","ERR","audit-logger","TLS handshake failure with peer node","172.16.0.36",500,93.1
+"2026-10-28 09:08:20","CRIT","audit-logger","TLS handshake failure with peer node","172.16.0.48",500,43.2
+"2026-10-28 09:09:26","INFO","cluster-mgr","Audit log verification checkpoint #86","172.16.0.7",200,80.3
+"2026-10-28 09:10:34","INFO","audit-logger","Audit log verification checkpoint #87","172.16.0.12",200,119.4
+"2026-10-28 09:10:55","WARN","key-vault","Audit log verification checkpoint #88","172.16.0.16",403,113.1
+"2026-10-28 09:11:40","INFO","key-vault","Audit log verification checkpoint #89","172.16.0.2",200,63.2
+"2026-10-28 09:12:11","INFO","rbac-service","Audit log verification checkpoint #90","172.16.0.9",200,96.8
+"2026-10-28 09:12:40","INFO","key-vault","Audit log verification checkpoint #91","172.16.0.33",200,97.5
+"2026-10-28 09:13:19","INFO","key-vault","Audit log verification checkpoint #92","172.16.0.38",200,57.9
+"2026-10-28 09:14:00","WARN","rbac-service","Audit log verification checkpoint #93","172.16.0.48",403,27.6
+"2026-10-28 09:14:41","CRIT","cluster-mgr","TLS handshake failure with peer node","172.16.0.16",500,65.0
+"2026-10-28 09:15:37","INFO","audit-logger","Audit log verification checkpoint #95","172.16.0.7",200,71.5
+"2026-10-28 09:16:22","CRIT","audit-logger","TLS handshake failure with peer node","172.16.0.31",500,17.3
+"2026-10-28 09:16:42","INFO","audit-logger","Audit log verification checkpoint #97","172.16.0.27",200,144.9
+"2026-10-28 09:17:49","ERR","audit-logger","TLS handshake failure with peer node","172.16.0.43",500,59.8
+"2026-10-28 09:18:32","ERR","key-vault","TLS handshake failure with peer node","172.16.0.23",500,21.9
