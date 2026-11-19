@@ -29,7 +29,7 @@ LogLens AI is designed specifically for **observability and systems reliability 
    - Inspects dataset profile and metadata.
    - Proposes targeted chart types (`line`, `stacked_bar`, `bar`, `pie`, `donut`, `histogram`, `heatmap`), analytical questions, and suitability scores.
    - **Safety Boundary**: The AI only recommends the chart metadata; the backend deterministically calculates all chart values from the raw data.
-   - **Deterministic Fallback**: Runs 100% offline and locally without an OpenAI API key.
+   - **Deterministic Fallback**: Runs locally when Gemini is unconfigured or unavailable.
 
 4. **Recommendation Evaluation & Decision Tracking**:
    - Users can **Accept**, **Reject** (with reason), or **Modify** (change chart type) recommendations.
@@ -52,7 +52,7 @@ LogLens AI is designed specifically for **observability and systems reliability 
 
 - **Frontend**: React 18, Vite, TypeScript, Tailwind CSS, Lucide React, Recharts.
 - **Backend**: Python 3.12, FastAPI, Pandas, NumPy, Regular Expressions, Pydantic v2.
-- **AI Integration**: Optional OpenAI API (`gpt-4o-mini`) with intelligent rule-based fallback.
+- **AI Integration**: Optional Gemini API (`gemini-3.5-flash-lite`) with a local rule-based fallback.
 - **Testing**: Pytest, Pytest-Asyncio, FastAPI TestClient.
 
 ---
@@ -147,7 +147,7 @@ python -m venv venv
 # Install dependencies
 pip install -r requirements.txt
 
-# (Optional) Configure OpenAI API key in .env
+# (Optional) Copy the example, then set GEMINI_API_KEY in .env
 Copy-Item .env.example .env
 
 # Generate synthetic samples
@@ -207,11 +207,17 @@ Configuration is managed via environment variables (or a `backend/.env` file):
 
 | Variable | Default | Purpose |
 | :--- | :--- | :--- |
-| `OPENAI_API_KEY` | *Empty* | Optional OpenAI API key. If omitted, uses intelligent rule-based recommender. |
-| `OPENAI_MODEL` | `gpt-4o-mini` | Model for visualization recommendations & SRE summaries. |
+| `GEMINI_API_KEY` | *Empty* | Optional Gemini API key. With no key, both AI features use local rules. |
+| `GEMINI_MODEL` | `gemini-3.5-flash-lite` | Gemini model for chart recommendations and investigation suggestions. |
 | `PORT` | `8000` | Server listening port. |
 | `HOST` | `0.0.0.0` | Server host binding. |
 | `MAX_FILE_SIZE_MB` | `50` | Maximum file size for upload. |
+
+Create a key in [Google AI Studio](https://aistudio.google.com/api-keys), set it in `backend/.env`,
+and restart the backend. The recommendations and investigation screens indicate when Gemini contributed
+or local rules were used. Backend logs report Gemini request failures. Chart recommendations send
+dataset metadata to Gemini. Investigations send the question and derived findings, which can include
+log message excerpts, service names and request paths.
 
 ---
 

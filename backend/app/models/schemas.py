@@ -132,6 +132,7 @@ class ChartRecommendation(BaseModel):
     suitability_score: float  # 0.0 - 1.0
     aggregation_target: str
     time_interval: Optional[str] = "1h"  # 1m, 5m, 1h, 1d
+    source: Literal["gemini", "rules"] = "rules"
 
 
 class RecommendationEvaluation(BaseModel):
@@ -165,6 +166,7 @@ class InvestigateResponse(BaseModel):
     hypotheses: List[str]
     recommended_checks: List[str]
     supporting_metrics: Dict[str, Any]
+    source: Literal["gemini", "rules"] = "rules"
 
 
 class LogFilterQuery(BaseModel):

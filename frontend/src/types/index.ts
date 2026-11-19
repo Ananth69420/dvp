@@ -125,6 +125,7 @@ export interface ChartRecommendation {
   limitations: string;
   suitability_score: number;
   aggregation_target: string;
+  source?: 'gemini' | 'rules';
   time_interval?: string;
 }
 
@@ -153,6 +154,7 @@ export interface InvestigateRequest {
 }
 
 export interface InvestigateResponse {
+  source?: 'gemini' | 'rules';
   query: string;
   evidence_found: boolean;
   factual_findings: string[];

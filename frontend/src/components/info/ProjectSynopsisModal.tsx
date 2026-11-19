@@ -73,7 +73,7 @@ export const ProjectSynopsisModal: React.FC<ProjectSynopsisModalProps> = ({ onCl
           <ul className="space-y-1 text-slate-600 list-disc list-inside">
             <li><strong>No Fabricated Data:</strong> Missing fields remain unavailable rather than hallucinated or imputed.</li>
             <li><strong>AI Safety &amp; Untrusted Inputs:</strong> Log contents are treated as untrusted data strings. AI only recommends visualization structures and analytical questions.</li>
-            <li><strong>Deterministic Rule Fallback:</strong> The entire application operates 100% locally and offline without an OpenAI API key.</li>
+            <li><strong>Local Rules:</strong> Recommendations and investigations work offline without a Gemini API key.</li>
             <li><strong>Evaluation Auditability:</strong> Acceptance rate measures user decisions and workflow fit, not algorithmic accuracy.</li>
           </ul>
         </div>

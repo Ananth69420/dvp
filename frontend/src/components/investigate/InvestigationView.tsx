@@ -37,6 +37,7 @@ export const InvestigationView: React.FC<InvestigationViewProps> = ({ datasetId 
     if (!qText.trim()) return;
     setIsLoading(true);
     setError(null);
+    setResponse(null);
     try {
       const res = await apiClient.investigate(datasetId, qText);
       setResponse(res);
@@ -129,7 +130,7 @@ export const InvestigationView: React.FC<InvestigationViewProps> = ({ datasetId 
               <span className="text-xs font-bold text-white">"{response.query}"</span>
             </div>
             <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-emerald-400 font-mono border border-slate-700">
-              Evidence Verified
+              {response.source === 'gemini' ? 'Gemini assisted' : 'Local rules'}
             </span>
           </div>
 
@@ -144,6 +145,9 @@ export const InvestigationView: React.FC<InvestigationViewProps> = ({ datasetId 
             <p className="text-xs text-slate-500">
               These findings reflect actual counts, timestamps, and percentages verified by the backend analytics engine:
             </p>
+            {!response.evidence_found && (
+              <p className="text-xs text-slate-500">No evidence was found for this question.</p>
+            )}
             <ul className="space-y-2 mt-2">
               {response.factual_findings.map((fact, idx) => (
                 <li

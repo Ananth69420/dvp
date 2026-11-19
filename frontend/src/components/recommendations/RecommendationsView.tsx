@@ -105,7 +105,11 @@ export const RecommendationsView: React.FC<RecommendationsViewProps> = ({
               </h2>
             </div>
             <p className="text-xs text-slate-500 mt-1 max-w-2xl">
-              Recommendations are generated based on available log fields and profiling statistics. The AI recommends schema mappings and analytical questions; actual chart values are deterministically calculated by the backend.
+              {recommendations.length === 0
+                ? 'No chart recommendations are available for these log fields.'
+                : recommendations.some((rec) => rec.source === 'gemini')
+                  ? 'Gemini selected these charts. The backend calculates the chart values from your logs.'
+                  : 'Local rules selected these charts. The backend calculates the chart values from your logs.'}
             </p>
           </div>
 

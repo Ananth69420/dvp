@@ -1,8 +1,10 @@
-import json
-from typing import List, Dict, Any, Optional
-import httpx
-from app.config import OPENAI_API_KEY, OPENAI_MODEL
+from typing import List, Optional
+
+from pydantic import BaseModel, Field, ValidationError
+
+from app.config import GEMINI_API_KEY, GEMINI_MODEL
 from app.models.schemas import ChartRecommendation, LogAnalytics
+from app.services.gemini import generate_json, logger
 
 ALLOWED_CHART_TYPES = {"line", "stacked_bar", "bar", "pie", "donut", "histogram", "heatmap"}
 ALLOWED_FIELDS = {
@@ -18,10 +20,24 @@ ALLOWED_FIELDS = {
 }
 
 
+class GeminiChartSuggestion(BaseModel):
+    id: str
+    title: str = Field(min_length=1)
+    analytical_question: str = Field(min_length=1)
+    reason: str = Field(min_length=1)
+    expected_insight: str = Field(min_length=1)
+    limitations: str = Field(min_length=1)
+    suitability_score: float = Field(ge=0.0, le=1.0)
+
+
+class GeminiChartSuggestions(BaseModel):
+    recommendations: List[GeminiChartSuggestion] = Field(max_length=8)
+
+
 class AiRecommenderService:
     def __init__(self, api_key: Optional[str] = None, model: Optional[str] = None):
-        self.api_key = api_key or OPENAI_API_KEY
-        self.model = model or OPENAI_MODEL
+        self.api_key = GEMINI_API_KEY if api_key is None else api_key.strip()
+        self.model = model or GEMINI_MODEL
 
     def generate_recommendations(
         self,
@@ -33,15 +49,12 @@ class AiRecommenderService:
         Generates validated chart recommendations.
         Tries AI first if API key is present; otherwise (or on failure) uses intelligent rule-based engine.
         """
-        if self.api_key and len(self.api_key.strip()) > 5:
-            try:
-                ai_recs = self._call_openai_recommendations(available_fields, analytics, format_name)
-                if ai_recs:
-                    return ai_recs
-            except Exception:
-                pass  # Fallback to rule-based
-
-        return self._rule_based_recommendations(available_fields, analytics)
+        local_recs = self._rule_based_recommendations(available_fields, analytics)
+        if self.api_key and local_recs:
+            ai_recs = self._call_gemini_recommendations(available_fields, analytics, format_name, local_recs)
+            if ai_recs:
+                return ai_recs
+        return local_recs
 
     def _rule_based_recommendations(
         self, available_fields: List[str], analytics: LogAnalytics
@@ -57,7 +70,7 @@ class AiRecommenderService:
                     chart_type="line",
                     title="Log Volume & Error Trajectory Over Time",
                     analytical_question="When did traffic spikes, operational degradation, or error cascades occur?",
-                    required_fields=["timestamp", "level"],
+                    required_fields=["timestamp", "level"] if "level" in fields_set else ["timestamp"],
                     reason="Time-series line chart provides an intuitive view of volume fluctuation and error surges across temporal windows.",
                     expected_insight="Pinpoint exact timestamps of error bursts, system crashes, or recovery phases.",
                     limitations="Requires continuous timestamp coverage. Non-uniform intervals may display sparse buckets.",
@@ -86,7 +99,7 @@ class AiRecommenderService:
             )
 
         # 3. Overall Severity Distribution (Donut / Pie)
-        if "level" in fields_set and (analytics.error_count > 0 or analytics.info_count > 0):
+        if "level" in fields_set and analytics.parsed_lines > 0:
             recs.append(
                 ChartRecommendation(
                     id="rec-severity-pie",
@@ -120,7 +133,7 @@ class AiRecommenderService:
             )
 
         # 5. Top Recurring Error Signatures (Bar)
-        if len(analytics.top_errors) > 0:
+        if {"message", "level"} <= fields_set and analytics.top_errors:
             recs.append(
                 ChartRecommendation(
                     id="rec-top-errors",
@@ -171,7 +184,7 @@ class AiRecommenderService:
             )
 
         # 8. Activity Heatmap by Day & Hour (Heatmap)
-        if "timestamp" in fields_set and len(analytics.heatmap) > 0:
+        if {"timestamp", "level"} <= fields_set and analytics.heatmap:
             recs.append(
                 ChartRecommendation(
                     id="rec-activity-heatmap",
@@ -191,94 +204,61 @@ class AiRecommenderService:
         recs.sort(key=lambda r: r.suitability_score, reverse=True)
         return recs
 
-    def _call_openai_recommendations(
-        self, available_fields: List[str], analytics: LogAnalytics, format_name: str
+    def _call_gemini_recommendations(
+        self,
+        available_fields: List[str],
+        analytics: LogAnalytics,
+        format_name: str,
+        local_recs: List[ChartRecommendation],
     ) -> List[ChartRecommendation]:
-        # Compact summary sent to AI (no raw sensitive entries!)
-        prompt_data = {
-            "format": format_name,
-            "available_fields": available_fields,
-            "total_lines": analytics.total_lines,
-            "error_count": analytics.error_count,
-            "warning_count": analytics.warning_count,
-            "info_count": analytics.info_count,
-            "distinct_services": analytics.distinct_services_count,
-            "has_status_codes": bool(analytics.status_code_distribution),
-            "has_response_times": analytics.response_time_stats is not None,
-            "has_timestamps": "timestamp" in available_fields,
-        }
-
-        system_prompt = (
-            "You are an expert Data Visualization Engineer specializing in operational log analytics.\n"
-            "Given available log metadata, recommend 4 to 8 distinct, actionable visualization charts.\n"
-            "CRITICAL CONSTRAINTS:\n"
-            "1. ONLY recommend chart_type from: ['line', 'stacked_bar', 'bar', 'pie', 'donut', 'histogram', 'heatmap'].\n"
-            "2. required_fields MUST ONLY contain fields present in available_fields.\n"
-            "3. DO NOT fabricate data or log counts; you only recommend metadata and analytical questions.\n"
-            "4. Return strict JSON matching the schema: {'recommendations': [{"
-            " 'id': str, 'chart_type': str, 'title': str, 'analytical_question': str, 'required_fields': [str],"
-            " 'reason': str, 'expected_insight': str, 'limitations': str, 'suitability_score': float, 'aggregation_target': str}]}"
+        templates = {rec.id: rec for rec in local_recs}
+        result = generate_json(
+            self.api_key,
+            self.model,
+            feature="chart recommendations",
+            system_prompt=(
+                "Recommend the most relevant charts from the provided chart options. "
+                "Select existing ids once each and write a title, question, rationale, expected insight, "
+                "limitation and relevance score for each selected option. "
+                "Ground each suggestion in the supplied dataset profile and never invent log counts."
+            ),
+            prompt_data={
+                "format": format_name,
+                "available_fields": sorted(ALLOWED_FIELDS.intersection(available_fields)),
+                "total_lines": analytics.total_lines,
+                "error_count": analytics.error_count,
+                "warning_count": analytics.warning_count,
+                "info_count": analytics.info_count,
+                "distinct_services": analytics.distinct_services_count,
+                "chart_options": [
+                    rec.model_dump(include={"id", "title", "chart_type", "required_fields", "aggregation_target"})
+                    for rec in local_recs
+                ],
+            },
+            response_schema=GeminiChartSuggestions.model_json_schema(),
         )
+        if result is None:
+            return []
+        try:
+            suggestions = GeminiChartSuggestions.model_validate(result, strict=True).recommendations
+        except ValidationError:
+            logger.warning("Gemini chart recommendations returned invalid suggestions. Using local rules.")
+            return []
 
-        user_prompt = f"Analyze log dataset metadata and recommend appropriate visualizations:\n{json.dumps(prompt_data, indent=2)}"
-
-        headers = {
-            "Authorization": f"Bearer {self.api_key}",
-            "Content-Type": "application/json",
-        }
-        body = {
-            "model": self.model,
-            "messages": [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
-            ],
-            "response_format": {"type": "json_object"},
-            "temperature": 0.2,
-        }
-
-        with httpx.Client(timeout=12.0) as client:
-            resp = client.post("https://api.openai.com/v1/chat/completions", headers=headers, json=body)
-            if resp.status_code != 200:
-                return []
-            content = resp.json()["choices"][0]["message"]["content"]
-            parsed_json = json.loads(content)
-
-        # Allowlist validation
-        valid_recs: List[ChartRecommendation] = []
-        raw_list = parsed_json.get("recommendations", [])
-        avail_set = set(available_fields)
-
-        for item in raw_list:
-            c_type = item.get("chart_type")
-            req_fields = item.get("required_fields", [])
-            # Validate chart type
-            if c_type not in ALLOWED_CHART_TYPES:
-                continue
-            # Validate required fields against available fields
-            if not all(f in avail_set for f in req_fields):
-                continue
-
-            score = float(item.get("suitability_score", 0.8))
-            score = max(0.1, min(1.0, score))
-
-            valid_recs.append(
-                ChartRecommendation(
-                    id=str(item.get("id") or f"ai-rec-{len(valid_recs)}"),
-                    chart_type=c_type,
-                    title=str(item.get("title", "Log Analysis Chart")),
-                    analytical_question=str(item.get("analytical_question", "How does this metric behave?")),
-                    required_fields=req_fields,
-                    reason=str(item.get("reason", "Provides insights into log distribution.")),
-                    expected_insight=str(item.get("expected_insight", "Identify anomalies and trends.")),
-                    limitations=str(item.get("limitations", "Bounded by available fields.")),
-                    suitability_score=round(score, 2),
-                    aggregation_target=str(item.get("aggregation_target", "time_series")),
-                    time_interval="auto",
+        valid_recs = {}
+        for suggestion in suggestions:
+            if suggestion.id in templates and suggestion.id not in valid_recs:
+                valid_recs[suggestion.id] = templates[suggestion.id].model_copy(
+                    update={
+                        **suggestion.model_dump(exclude={"id"}),
+                        "suitability_score": round(suggestion.suitability_score, 2),
+                        "source": "gemini",
+                    },
                 )
-            )
 
-        valid_recs.sort(key=lambda r: r.suitability_score, reverse=True)
-        return valid_recs if valid_recs else self._rule_based_recommendations(available_fields, analytics)
+        if not valid_recs:
+            logger.warning("Gemini returned no supported chart recommendations. Using local rules.")
+        return sorted(valid_recs.values(), key=lambda rec: rec.suitability_score, reverse=True)
 
 
 ai_recommender = AiRecommenderService()
